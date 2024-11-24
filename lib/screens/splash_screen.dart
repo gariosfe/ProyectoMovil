@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyectomovil/HomePage.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,11 +61,12 @@ class _HomePageState extends State<HomePage> {
         title: Text("Pantalla Principal"),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),  // Icono de notificaciones
+          icon: Icon(MdiIcons.menuDownOutline),  
             onPressed: () {
-              // Acción para incrementar contador de notificaciones u otra
-            },
-          ),
+            // Acción al presionar
+          },
+),
+
         ],
       ),
       body: Column(
@@ -80,15 +82,16 @@ class _HomePageState extends State<HomePage> {
             height: 60.0,  // Altura fija para la barra
             color: Colors.blue,  // Color de la barra
             width: double.infinity,  // Hace que ocupe todo el ancho
-            child: Center(
-              child: Text(
-                "Barra en la parte inferior",  // Texto dentro de la barra
-                style: TextStyle(
-                  color: Colors.white,  // Color del texto
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,  // Alinea los elementos a la izquierda
+              children: [
+                IconButton(
+                  icon: Icon(Icons.menu),  // Icono de cámara
+                  onPressed: () {
+                    // Acción para el icono de la cámara u otra
+                  },
                 ),
-              ),
+              ],
             ),
           ),
         ],
@@ -96,4 +99,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
