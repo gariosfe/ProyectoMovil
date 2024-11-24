@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pantalla Principal"),
+        title: Text(" "),
         actions: [
           // IconButton de notificación sin Badge
           IconButton(

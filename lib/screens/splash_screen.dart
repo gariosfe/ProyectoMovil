@@ -69,20 +69,39 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Coloca los widgets de forma vertical
+        mainAxisAlignment: MainAxisAlignment.start, // Cambiar el alineamiento a la parte superior
         children: [
-          Expanded(
+          // Espacio superior para mover el rectángulo más arriba
+          SizedBox(height: 10.0),  // Ajusta esta altura para mover el rectángulo más arriba o más abajo
+          
+          // Rectángulo en la parte superior de color café
+          Container(
+            height: 50.0,  // Altura del rectángulo café
+            color: const Color.fromARGB(255, 208, 184, 118), // Color de la barra superior (café)
+            width: double.infinity, // Hace que ocupe todo el ancho
             child: Center(
-              child: Text(" "),
+              // Rectángulo blanco dentro del rectángulo café
+              child: Container(
+                height: 20.0, // Altura del rectángulo blanco
+                width: 250.0, // Ancho del rectángulo blanco
+                color: Colors.white, // Color blanco
+              ),
             ),
           ),
+          
+          Expanded(
+            child: Center(
+              child: Text(" "),  // Contenido vacío
+            ),
+          ),
+          
           // Barra cuadrada en la parte inferior
           Container(
-            height: 60.0, // Altura fija para la barra
-            color: const Color.fromARGB(255, 208, 184, 118), // Color de la barra
-            width: double.infinity, // Hace que ocupe todo el ancho
+            height: 60.0,  // Altura fija para la barra inferior
+            color: const Color.fromARGB(255, 208, 184, 118),  // Color de la barra
+            width: double.infinity,  // Hace que ocupe todo el ancho
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribuye los íconos uniformemente
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,  // Distribuye los íconos uniformemente
               children: [
                 IconButton(
                   icon: Icon(Icons.menu),
@@ -99,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 IconButton(
                   icon: Icon(
                     Icons.photo_camera_outlined,
-                    size: 36.0, // Aumenta el tamaño del ícono
+                    size: 36.0,  // Aumenta el tamaño del ícono
                   ),
                   onPressed: () {
                     // Acción para el icono de cámara
