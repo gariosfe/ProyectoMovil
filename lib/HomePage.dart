@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           // Contenido principal en la parte superior
           Expanded(
             child: Center(
-              child: Text("¡Bienvenido a la app!"),
+              child: Text(" "),
             ),
           ),
           // Barra cuadrada en la parte inferior
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,  // Hace que ocupe todo el ancho
             child: Center(
               child: Text(
-                "Barra en la parte inferior",  // Texto dentro de la barra
+                " ",  // Texto dentro de la barra
                 style: TextStyle(
                   color: const Color.fromARGB(255, 255, 255, 255),  // Color del texto
                   fontSize: 18,

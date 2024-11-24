@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyectomovil/HomePage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 void main() {
@@ -10,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),  // La pantalla Splash que se muestra primero
+      home: SplashScreen(), // La pantalla Splash que se muestra primero
       debugShowCheckedModeBanner: false,
     );
   }
@@ -38,9 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // Fondo blanco
-      body: Center(  // Centrado de la pantalla
+      body: Center(
+        // Centrado de la pantalla
         child: Text(
-          'Cargando...',  // Texto opcional mientras se carga
+          'Cargando...', // Texto opcional mientras se carga
           style: TextStyle(fontSize: 24, color: Colors.black),
         ),
       ),
@@ -58,37 +58,63 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pantalla Principal"),
+        title: Text(" "),
         actions: [
           IconButton(
-          icon: Icon(MdiIcons.menuDownOutline),  
+            icon: Icon(MdiIcons.menuDownOutline),
             onPressed: () {
-            // Acción al presionar
-          },
-),
-
+              // Acción al presionar
+            },
+          ),
         ],
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Coloca los widgets de forma vertical
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Coloca los widgets de forma vertical
         children: [
           Expanded(
             child: Center(
-              child: Text("¡Bienvenido a la app!"),
+              child: Text(" "),
             ),
           ),
           // Barra cuadrada en la parte inferior
           Container(
-            height: 60.0,  // Altura fija para la barra
-            color: Colors.blue,  // Color de la barra
-            width: double.infinity,  // Hace que ocupe todo el ancho
+            height: 60.0, // Altura fija para la barra
+            color: const Color.fromARGB(255, 208, 184, 118), // Color de la barra
+            width: double.infinity, // Hace que ocupe todo el ancho
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,  // Alinea los elementos a la izquierda
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribuye los íconos uniformemente
               children: [
                 IconButton(
-                  icon: Icon(Icons.menu),  // Icono de cámara
+                  icon: Icon(Icons.menu),
                   onPressed: () {
-                    // Acción para el icono de la cámara u otra
+                    // Acción para el icono de menú
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.favorite_border),
+                  onPressed: () {
+                    // Acción para el icono de favoritos
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.photo_camera_outlined,
+                    size: 36.0, // Aumenta el tamaño del ícono
+                  ),
+                  onPressed: () {
+                    // Acción para el icono de cámara
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.brightness_high_rounded),
+                  onPressed: () {
+                    // Acción para el icono de brillo
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.people_sharp),
+                  onPressed: () {
+                    // Acción para el icono de personas
                   },
                 ),
               ],
