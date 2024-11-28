@@ -1,22 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final ValueNotifier<ThemeMode> _themeNotifier = ValueNotifier(ThemeMode.light);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),  // Pantalla principal
-      debugShowCheckedModeBanner: false,
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: _themeNotifier,
+      builder: (context, ThemeMode currentMode, child) {
+        return MaterialApp(
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: currentMode,
+          home: HomePage(
+            onToggleTheme: () {
+              _themeNotifier.value = _themeNotifier.value == ThemeMode.light
+                  ? ThemeMode.dark
+                  : ThemeMode.light;
+            },
+          ),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
 
 class HomePage extends StatefulWidget {
+  final VoidCallback onToggleTheme;
+
+  HomePage({required this.onToggleTheme});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -30,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(" "),
         actions: [
-          // IconButton de notificación sin Badge
+          // IconButton de notificación
           IconButton(
             icon: Icon(Icons.notifications),  // Icono de notificaciones
             onPressed: () {
@@ -38,6 +57,11 @@ class _HomePageState extends State<HomePage> {
                 _notificationCount++;  // Incrementa el contador de notificaciones
               });
             },
+          ),
+          // IconButton para cambiar entre tema claro y oscuro
+          IconButton(
+            icon: Icon(Icons.brightness_6),  // Ícono de cambio de tema
+            onPressed: widget.onToggleTheme,
           ),
         ],
       ),

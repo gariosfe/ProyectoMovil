@@ -6,16 +6,36 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final ValueNotifier<ThemeMode> _themeNotifier = ValueNotifier(ThemeMode.light);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SplashScreen(), // La pantalla Splash que se muestra primero
-      debugShowCheckedModeBanner: false,
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: _themeNotifier,
+      builder: (context, ThemeMode currentMode, child) {
+        return MaterialApp(
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: currentMode,
+          home: SplashScreen(
+            onToggleTheme: () {
+              _themeNotifier.value = _themeNotifier.value == ThemeMode.light
+                  ? ThemeMode.dark
+                  : ThemeMode.light;
+            },
+          ),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
 
 class SplashScreen extends StatefulWidget {
+  final VoidCallback onToggleTheme;
+
+  SplashScreen({required this.onToggleTheme});
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -27,7 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(
+          builder: (context) => HomePage(onToggleTheme: widget.onToggleTheme),
+        ),
       );
     });
   }
@@ -47,6 +69,10 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 class HomePage extends StatefulWidget {
+  final VoidCallback onToggleTheme;
+
+  HomePage({required this.onToggleTheme});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -71,52 +97,52 @@ class _HomePageState extends State<HomePage> {
         children: [
           SizedBox(height: 10.0),
 
-          // Rectángulo superior con el logo a la izquierda y el buscador
+          // Rectángulo superior con el logo a la izquierda, el buscador y el botón de tema
           Container(
             height: 50.0,
-            color: const Color.fromARGB(255, 208, 184, 118),
+            color: const Color.fromARGB(255, 241, 236, 138),
             width: double.infinity,
-            child: Center(
-              child: Container(
-                height: 25.0,
-                width: 300.0,
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,  // Alineación a la izquierda
-                  children: [
-                    // Logo completamente a la izquierda
-                    Padding(
-                      padding: EdgeInsets.only(left: 0.0),  // Sin espacio adicional
-                      child: Image.asset(
-                        'assets/logo.png', // Ruta de la imagen
-                        width: 30.0, // Tamaño del logo
-                        height: 30.0,
-                        fit: BoxFit.contain, // Ajuste para respetar el aspecto
-                      ),
-                    ),
-                    // Campo de búsqueda
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'Search',
-                          hintStyle: TextStyle(
-                            color: const Color.fromARGB(75, 0, 0, 0),
-                            fontSize: 14,
-                          ),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
+            child: Row(
+              children: [
+                // Logo completamente a la izquierda
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0), // Espaciado a la izquierda
+                  child: Image.asset(
+                    'assets/logo.png', // Ruta de la imagen
+                    width: 30.0, // Tamaño del logo
+                    height: 30.0,
+                    fit: BoxFit.contain, // Ajuste para respetar el aspecto
+                  ),
+                ),
+                // Campo de búsqueda
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                          color: const Color.fromARGB(75, 0, 0, 0),
+                          fontSize: 14,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.grey,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                // Botón para alternar el tema
+                IconButton(
+                  icon: Icon(Icons.brightness_6), // Ícono para cambiar tema
+                  onPressed: widget.onToggleTheme,
+                ),
+              ],
             ),
           ),
 
@@ -145,7 +171,7 @@ class _HomePageState extends State<HomePage> {
           // Barra inferior con los iconos
           Container(
             height: 60.0,
-            color: const Color.fromARGB(255, 208, 184, 118),
+            color: const Color.fromARGB(255, 241, 236, 138),
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
