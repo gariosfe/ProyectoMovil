@@ -6,7 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final ValueNotifier<ThemeMode> _themeNotifier = ValueNotifier(ThemeMode.light);
+  final ValueNotifier<ThemeMode> _themeNotifier =
+      ValueNotifier(ThemeMode.light);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 // Logo completamente a la izquierda
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0), // Espaciado a la izquierda
+                  padding:
+                      EdgeInsets.only(left: 10.0), // Espaciado a la izquierda
                   child: Image.asset(
                     'assets/logo.png', // Ruta de la imagen
                     width: 30.0, // Tamaño del logo
